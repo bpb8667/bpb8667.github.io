@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intermediate Accounting II - Practice Exam</title>
+    <style>
+        /* Dark Mode Theme */
+        body {
+            background-color: #121212;
+            color: #e0e0e0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Progress Bar */
+        #progress-container {
+            width: 100%;
+            background-color: #333;
+            height: 10px;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+        #progress-bar {
+            height: 100%;
+            background-color: #4caf50;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        /* Main Card */
+        .container {
+            background-color: #1e1e1e;
+            width: 90%;
+            max-width: 600px;
+            margin-top: 60px;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+
+        .topic-tag {
+            color: #64b5f6;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        h2 { margin-top: 0; }
+
+        /* Buttons */
+        .options-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        button {
+            background-color: #2c2c2c;
+            color: #fff;
+            border: 2px solid #333;
+            padding: 15px;
+            font-size: 1em;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        button:hover {
+            background-color: #3a3a3a;
+            border-color: #64b5f6;
+        }
+
+        button:disabled {
+            cursor: not-allowed;
+            opacity: 0.8;
+        }
+
+        /* Feedback Section */
+        #feedback-section {
+            margin-top: 25px;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .correct-text { color: #4caf50; font-weight: bold; font-size: 1.2em; }
+        .wrong-text { color: #f44336; font-weight: bold; font-size: 1.2em; }
+        
+        .explanation {
+            margin-top: 10px;
+            font-size: 0.95em;
+            color: #ccc;
+        }
+
+        #next-btn, #restart-btn {
+            background-color: #64b5f6;
+            color: #000;
+            font-weight: bold;
+            margin-top: 20px;
+            border: none;
+        }
+        #next-btn:hover, #restart-btn:hover { background-color: #42a5f5; }
+
+        /* Hide elements dynamically */
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+
+    <div id="progress-container">
+        <div id="progress-bar"></div>
+    </div>
+
+    <div class="container" id="quiz-container">
+        <span class="topic-tag" id="topic-display">Topic</span>
+        <h2 id="question-text">Loading question...</h2>
+        
+        <div class="options-grid" id="options-container">
+            </div>
+
+        <div id="feedback-section">
+            <div id="feedback-result"></div>
+            <div class="explanation" id="explanation-text"></div>
+            <button id="next-btn" onclick="nextQuestion()">Next Question</button>
+        </div>
+    </div>
+
+    <div class="container hidden" id="results-container">
+        <h2>Exam Complete!</h2>
+        <h1 id="score-display">0%</h1>
+        <p id="score-message"></p>
+        <button id="restart-btn" onclick="startExam()">Retake Exam</button>
+    </div>
+
+    <script>
+        // ==========================================
+        // 📚 YOUR QUESTION BANK
+        // Add all your Intermediate II questions here!
+        // ==========================================
+        const masterQuestionBank = [
+            {
+                topic: "Leases",
+                question: "Which of the following is NOT one of the 5 criteria for a lessee to classify a lease as a Finance Lease?",
+                options: [
+                    "The lease transfers ownership of the asset.",
+                    "The lease contains a reasonably certain purchase option.",
+                    "The lease term is for the major part of the remaining economic life of the asset (75%+).",
+                    "The present value of lease payments is at least 50% of the fair value of the asset."
+                ],
+                answer: "The present value of lease payments is at least 50% of the fair value of the asset.",
+                explanation: "The PV of the lease payments must equal or exceed substantially all (typically 90% or more) of the fair value of the asset, not 50%."
+            },
+            {
+                topic: "Bonds Payable",
+                question: "If a bond is issued at a premium, what happens to the carrying value of the bond over its life?",
+                options: [
+                    "It increases until it reaches face value.",
+                    "It decreases until it reaches face value.",
+                    "It remains the same.",
+                    "It decreases to zero."
+                ],
+                answer: "It decreases until it reaches face value.",
+                explanation: "A premium means the bond was sold for more than face value. As the premium is amortized over the life of the bond, the carrying value decreases down to the face value at maturity."
+            },
+            {
+                topic: "Pensions",
+                question: "Which of the following components of pension expense decreases the total pension expense for the period?",
+                options: [
+                    "Service Cost",
+                    "Interest on the Liability",
+                    "Expected Return on Plan Assets",
+                    "Amortization of Prior Service Cost"
+                ],
+                answer: "Expected Return on Plan Assets",
+                explanation: "The expected return on plan assets offsets the costs of the pension plan, thereby reducing the total pension expense recognized on the income statement."
+            },
+            {
+                topic: "Deferred Taxes",
+                question: "A company recognizes a Deferred Tax Asset when:",
+                options: [
+                    "Taxable income is currently less than pretax financial income due to a temporary difference.",
+                    "Taxable income is currently greater than pretax financial income due to a temporary difference.",
+                    "There is a permanent difference like municipal bond interest.",
+                    "The enacted tax rate is expected to decrease in the future."
+                ],
+                answer: "Taxable income is currently greater than pretax financial income due to a temporary difference.",
+                explanation: "When you pay more taxes now than your financial income suggests you owe (e.g., due to unearned rent revenue), you create a Deferred Tax Asset because you will pay less in the future when the financial income is recognized."
+            }
+            // Add more questions following this exact format!
+        ];
+
+        // ==========================================
+        // ⚙️ APP LOGIC
+        // ==========================================
+        const QUESTIONS_PER_EXAM = 25; 
+        let currentExamQuestions = [];
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        // Fisher-Yates Shuffle Algorithm
+        function shuffleArray(array) {
+            let shuffled = array.slice();
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
+        }
+
+        function startExam() {
+            // Hide results, show quiz
+            document.getElementById('results-container').classList.add('hidden');
+            document.getElementById('quiz-container').classList.remove('hidden');
+            
+            // Reset variables
+            score = 0;
+            currentQuestionIndex = 0;
+
+            // Shuffle master bank and grab the required amount
+            // (Uses Math.min just in case you have fewer than 25 questions in the bank right now)
+            let shuffledBank = shuffleArray(masterQuestionBank);
+            let limit = Math.min(QUESTIONS_PER_EXAM, shuffledBank.length);
+            currentExamQuestions = shuffledBank.slice(0, limit);
+
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            // Reset UI
+            document.getElementById('feedback-section').style.display = 'none';
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.innerHTML = '';
+
+            // Update Progress Bar
+            let progressPct = (currentQuestionIndex / currentExamQuestions.length) * 100;
+            document.getElementById('progress-bar').style.width = `${progressPct}%`;
+
+            // Load current question data
+            const qData = currentExamQuestions[currentQuestionIndex];
+            document.getElementById('topic-display').innerText = `Question ${currentQuestionIndex + 1} of ${currentExamQuestions.length} — ${qData.topic}`;
+            document.getElementById('question-text').innerText = qData.question;
+
+            // Shuffle the options so they aren't always in the same order A, B, C, D
+            let shuffledOptions = shuffleArray(qData.options);
+
+            shuffledOptions.forEach(option => {
+                const btn = document.createElement('button');
+                btn.innerText = option;
+                btn.onclick = () => checkAnswer(btn, option, qData);
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(clickedBtn, selectedOption, qData) {
+            // Disable all buttons so user can't click twice
+            const allButtons = document.getElementById('options-container').querySelectorAll('button');
+            allButtons.forEach(btn => btn.disabled = true);
+
+            const feedbackSection = document.getElementById('feedback-section');
+            const resultText = document.getElementById('feedback-result');
+            const explanationText = document.getElementById('explanation-text');
+
+            feedbackSection.style.display = 'block';
+
+            if (selectedOption === qData.answer) {
+                score++;
+                clickedBtn.style.backgroundColor = '#2e7d32'; // Dark green
+                clickedBtn.style.borderColor = '#4caf50';
+                resultText.innerHTML = '<span class="correct-text">Correct!</span>';
+                explanationText.innerText = qData.explanation;
+            } else {
+                clickedBtn.style.backgroundColor = '#c62828'; // Dark red
+                clickedBtn.style.borderColor = '#f44336';
+                resultText.innerHTML = '<span class="wrong-text">Wrong.</span>';
+                explanationText.innerHTML = `<strong>Correct Answer:</strong> ${qData.answer}<br><br>${qData.explanation}`;
+                
+                // Highlight the correct answer
+                allButtons.forEach(btn => {
+                    if(btn.innerText === qData.answer) {
+                        btn.style.borderColor = '#4caf50';
+                        btn.style.color = '#4caf50';
+                    }
+                });
+            }
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < currentExamQuestions.length) {
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            document.getElementById('quiz-container').classList.add('hidden');
+            document.getElementById('results-container').classList.remove('hidden');
+            
+            // Set progress bar to 100%
+            document.getElementById('progress-bar').style.width = `100%`;
+
+            let percent = Math.round((score / currentExamQuestions.length) * 100);
+            document.getElementById('score-display').innerText = `${percent}%`;
+
+            let message = "";
+            if(percent >= 90) message = "Excellent work! You are ready for the exam.";
+            else if (percent >= 70) message = "Good job, but keep reviewing the explanations.";
+            else message = "Keep studying! Intermediate II is tough, you've got this.";
+
+            document.getElementById('score-message').innerText = message;
+        }
+
+        // Start the app when the page loads
+        window.onload = startExam;
+
+    </script>
+</body>
+</html>
