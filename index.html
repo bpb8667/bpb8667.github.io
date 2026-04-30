@@ -150,54 +150,183 @@
         // ==========================================
         const masterQuestionBank = [
             {
+                const masterQuestionBank = [
+            {
                 topic: "Leases",
-                question: "Which of the following is NOT one of the 5 criteria for a lessee to classify a lease as a Finance Lease?",
-                options: [
-                    "The lease transfers ownership of the asset.",
-                    "The lease contains a reasonably certain purchase option.",
-                    "The lease term is for the major part of the remaining economic life of the asset (75%+).",
-                    "The present value of lease payments is at least 50% of the fair value of the asset."
-                ],
-                answer: "The present value of lease payments is at least 50% of the fair value of the asset.",
-                explanation: "The PV of the lease payments must equal or exceed substantially all (typically 90% or more) of the fair value of the asset, not 50%."
+                question: "If a lease contains a 'bargain purchase option', what is the appropriate depreciation period for the Right-of-Use (ROU) asset?",
+                options: ["The lease term.", "The economic life of the asset.", "5 years per GAAP default.", "It is not depreciated."],
+                answer: "The economic life of the asset.",
+                explanation: "If ownership transfers or there is a bargain purchase option, you depreciate over the asset's full economic life, not just the lease term."
             },
             {
-                topic: "Bonds Payable",
-                question: "If a bond is issued at a premium, what happens to the carrying value of the bond over its life?",
-                options: [
-                    "It increases until it reaches face value.",
-                    "It decreases until it reaches face value.",
-                    "It remains the same.",
-                    "It decreases to zero."
-                ],
-                answer: "It decreases until it reaches face value.",
-                explanation: "A premium means the bond was sold for more than face value. As the premium is amortized over the life of the bond, the carrying value decreases down to the face value at maturity."
+                topic: "Leases",
+                question: "Which of the following is a 'qualitative' factor that could trigger a Finance Lease classification?",
+                options: ["The asset is of such a specialized nature that it has no alternative use to the lessor.", "The lease term is 50% of the asset life.", "The PV of payments is 75% of fair value.", "The lease has a month-to-month cancellation clause."],
+                answer: "The asset is of such a specialized nature that it has no alternative use to the lessor.",
+                explanation: "This is the '5th test.' If the asset is so specialized that the lessor can't lease it to anyone else afterward, it is a finance lease."
+            },
+            {
+                topic: "Bonds",
+                question: "When using the effective-interest method, interest expense is calculated by multiplying the ________ by the ________.",
+                options: ["Face value; Stated rate", "Carrying value; Stated rate", "Carrying value; Market rate", "Face value; Market rate"],
+                answer: "Carrying value; Market rate",
+                explanation: "Interest Expense = Carrying Value x Market (Effective) Rate. The cash paid is Face Value x Stated Rate."
+            },
+            {
+                topic: "Bonds",
+                question: "A bond issued at a discount results in a cash interest payment that is:",
+                options: ["Higher than the interest expense.", "Lower than the interest expense.", "Equal to the interest expense.", "Zero until maturity."],
+                answer: "Lower than the interest expense.",
+                explanation: "When a bond is at a discount, the interest expense includes the cash paid PLUS the amortization of the discount."
             },
             {
                 topic: "Pensions",
-                question: "Which of the following components of pension expense decreases the total pension expense for the period?",
-                options: [
-                    "Service Cost",
-                    "Interest on the Liability",
-                    "Expected Return on Plan Assets",
-                    "Amortization of Prior Service Cost"
-                ],
-                answer: "Expected Return on Plan Assets",
-                explanation: "The expected return on plan assets offsets the costs of the pension plan, thereby reducing the total pension expense recognized on the income statement."
+                question: "The 'PBO' (Projected Benefit Obligation) is measured using:",
+                options: ["Current salary levels.", "Future salary levels.", "Only vested benefits.", "The market value of plan assets."],
+                answer: "Future salary levels.",
+                explanation: "PBO is the most comprehensive measure because it assumes the employees will continue to work and receive pay raises (future salaries)."
+            },
+            {
+                topic: "Pensions",
+                question: "Which pension component is recorded in Other Comprehensive Income (OCI) and then amortized over time?",
+                options: ["Service Cost", "Interest Cost", "Prior Service Cost", "Expected Return on Assets"],
+                answer: "Prior Service Cost",
+                explanation: "Prior Service Cost (from plan amendments) is parked in OCI and recycled into Pension Expense over the remaining service life of employees."
             },
             {
                 topic: "Deferred Taxes",
-                question: "A company recognizes a Deferred Tax Asset when:",
-                options: [
-                    "Taxable income is currently less than pretax financial income due to a temporary difference.",
-                    "Taxable income is currently greater than pretax financial income due to a temporary difference.",
-                    "There is a permanent difference like municipal bond interest.",
-                    "The enacted tax rate is expected to decrease in the future."
-                ],
-                answer: "Taxable income is currently greater than pretax financial income due to a temporary difference.",
-                explanation: "When you pay more taxes now than your financial income suggests you owe (e.g., due to unearned rent revenue), you create a Deferred Tax Asset because you will pay less in the future when the financial income is recognized."
+                question: "Which of the following creates a Deferred Tax Liability (DTL)?",
+                options: ["Fines and penalties.", "Warranty liabilities.", "Accelerated depreciation for tax and straight-line for books.", "Subscriptions received in advance."],
+                answer: "Accelerated depreciation for tax and straight-line for books.",
+                explanation: "Accelerated depreciation means you pay less tax now but will pay more later—this is the definition of a liability."
+            },
+            {
+                topic: "Deferred Taxes",
+                question: "A 'Permanent Difference' between book income and tax income:",
+                options: ["Creates a Deferred Tax Asset.", "Creates a Deferred Tax Liability.", "Results in an effective tax rate that differs from the statutory rate.", "Will reverse in future years."],
+                answer: "Results in an effective tax rate that differs from the statutory rate.",
+                explanation: "Permanent differences (like muni-bond interest) never reverse, so they don't create DTAs or DTLs. They just change your actual tax percentage."
+            },
+            {
+                topic: "EPS",
+                question: "In calculating Diluted EPS, the 'if-converted' method for convertible bonds assumes:",
+                options: ["Interest expense (net of tax) is added back to the numerator.", "Preferred dividends are subtracted from the numerator.", "Shares are added to the denominator at the end of the year.", "The bonds were never issued."],
+                answer: "Interest expense (net of tax) is added back to the numerator.",
+                explanation: "If the bonds were converted, the company wouldn't have paid interest. Therefore, we add that saved interest expense back to the net income."
+            },
+            {
+                topic: "EPS",
+                question: "Stock options are considered 'dilutive' only when:",
+                options: ["The company is profitable.", "The exercise price is higher than the market price.", "The market price is higher than the exercise price.", "The board of directors declares a dividend."],
+                answer: "The market price is higher than the exercise price.",
+                explanation: "This is 'In the Money.' If the market price is lower, the options are 'Antidilutive' because nobody would exercise them."
+            },
+            {
+                topic: "Revenue Recognition",
+                question: "Under the 5-step model, when is revenue recognized for a performance obligation satisfied 'over time'?",
+                options: ["Only when the contract is 100% complete.", "Based on the progress toward completion.", "When the cash is received.", "When the contract is signed."],
+                answer: "Based on the progress toward completion.",
+                explanation: "Companies use input or output methods (like percentage-of-completion) to recognize revenue as they work."
+            },
+            {
+                topic: "Stockholders Equity",
+                question: "When treasury stock is purchased using the 'Cost Method', which account is debited?",
+                options: ["Common Stock", "Retained Earnings", "Treasury Stock", "Paid-in Capital"],
+                answer: "Treasury Stock",
+                explanation: "Treasury Stock is a contra-equity account. You debit it at the cost paid to reacquire the shares."
+            },
+            {
+                topic: "Stockholders Equity",
+                question: "A small stock dividend (less than 20-25%) is recorded at:",
+                options: ["Par value.", "Market value.", "Liquidation value.", "Historical cost."],
+                answer: "Market value.",
+                explanation: "Small stock dividends are recorded at fair market value, while large stock dividends are recorded at par value."
+            },
+            {
+                topic: "Statement of Cash Flows",
+                question: "Under the indirect method, an increase in Accounts Receivable is:",
+                options: ["Added to Net Income.", "Subtracted from Net Income.", "Ignored.", "Added to Financing Activities."],
+                answer: "Subtracted from Net Income.",
+                explanation: "An increase in AR means you earned revenue (included in Net Income) but didn't collect the cash yet. You must subtract it to get to Cash Basis."
+            },
+            {
+                topic: "Investments",
+                question: "Debt investments classified as 'Held-to-Maturity' (HTM) are reported at:",
+                options: ["Fair Value.", "Amortized Cost.", "Lower of Cost or Market.", "Net Realizable Value."],
+                answer: "Amortized Cost.",
+                explanation: "Since you intend to hold them until they mature, fluctuations in market price don't matter; you report the cost adjusted for amortization."
+            },
+            {
+                topic: "Investments",
+                question: "Unrealized gains/losses on 'Trading' debt securities are reported in:",
+                options: ["Other Comprehensive Income (OCI).", "Net Income.", "Retained Earnings directly.", "The notes only."],
+                answer: "Net Income.",
+                explanation: "Trading securities are meant for quick profit, so gains and losses go directly to the Income Statement."
+            },
+            {
+                topic: "Revenue Recognition",
+                question: "A 'Contract Liability' is created when:",
+                options: ["Work is done before payment.", "Cash is received before work is done.", "A contract is cancelled.", "A customer returns a product."],
+                answer: "Cash is received before work is done.",
+                explanation: "This was formerly known as Unearned Revenue."
+            },
+            {
+                topic: "Pensions",
+                question: "The 'Corridor' for pension gain/loss amortization is defined as 10% of the greater of:",
+                options: ["PBO or Fair Value of Plan Assets.", "Service Cost or Interest Cost.", "Net Income or Retained Earnings.", "Market Rate or Stated Rate."],
+                answer: "PBO or Fair Value of Plan Assets.",
+                explanation: "If the accumulated gain/loss exceeds this 'corridor,' the excess must be amortized into expense."
+            },
+            {
+                topic: "Dilutive Securities",
+                question: "The 'Treasury Stock Method' is used to calculate the dilutive effect of:",
+                options: ["Convertible Bonds.", "Convertible Preferred Stock.", "Stock Options and Warrants.", "Stock Splits."],
+                answer: "Stock Options and Warrants.",
+                explanation: "This method assumes the proceeds from exercising options are used by the company to buy back shares at the average market price."
+            },
+            {
+                topic: "Leases",
+                question: "From the perspective of the Lessor, a lease that meets the finance criteria but has a third-party guarantee is called a:",
+                options: ["Operating Lease.", "Direct-Financing Lease.", "Sales-Type Lease.", "Capital Lease."],
+                answer: "Direct-Financing Lease.",
+                explanation: "If the lease meets finance criteria but the profit is only due to a third-party guarantee (not a manufacturer profit), it's Direct-Financing."
+            },
+            {
+                topic: "Deferred Taxes",
+                question: "A valuation allowance is required for a Deferred Tax Asset if it is:",
+                options: ["More likely than not that some portion will not be realized.", "A permanent difference.", "A liability instead of an asset.", "Over $1 million."],
+                answer: "More likely than not that some portion will not be realized.",
+                explanation: "'More likely than not' means a probability of greater than 50%."
+            },
+            {
+                topic: "Accounting Changes",
+                question: "A change in depreciation method (e.g., from Double Declining to Straight Line) is treated as a:",
+                options: ["Change in Accounting Principle.", "Change in Accounting Estimate.", "Error Correction.", "Change in Reporting Entity."],
+                answer: "Change in Accounting Estimate.",
+                explanation: "Even though it sounds like a principle, GAAP treats a change in depreciation method as a change in estimate achieved by a change in principle (prospective application)."
+            },
+            {
+                topic: "Accounting Changes",
+                question: "Correction of an error from a prior period requires:",
+                options: ["A footnote only.", "Prospective adjustment.", "A prior period adjustment to Retained Earnings.", "Writing off the asset."],
+                answer: "A prior period adjustment to Retained Earnings.",
+                explanation: "Errors are handled 'retrospectively,' meaning you go back and fix the beginning balance of Retained Earnings."
+            },
+            {
+                topic: "Bonds",
+                question: "The 'Stated Rate' on a bond is also known as the:",
+                options: ["Effective Rate.", "Market Rate.", "Coupon Rate.", "Yield."],
+                answer: "Coupon Rate.",
+                explanation: "The Coupon or Nominal rate is what is printed on the bond and determines the cash interest payments."
+            },
+            {
+                topic: "Pensions",
+                question: "If Plan Assets ($500k) are less than the PBO ($600k), the plan is:",
+                options: ["Overfunded.", "Underfunded.", "In Equilibrium.", "Fully Vested."],
+                answer: "Underfunded.",
+                explanation: "If you owe more (PBO) than you have in the bank (Plan Assets), the plan is underfunded and shown as a liability on the balance sheet."
             }
-            // Add more questions following this exact format!
+        ];
         ];
 
         // ==========================================
